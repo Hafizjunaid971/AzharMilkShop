@@ -1,0 +1,22 @@
+import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+const axiosInstance = axios.create({
+  baseURL: API_URL,
+});
+
+// Attach token automatically
+axiosInstance.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+export const loginUser = (data) => axiosInstance.post('/auth/login', data);
+export const signupUser = (data) => axiosInstance.post('/auth/signup', data);
+export const getCurrentUser = () => axiosInstance.get('/auth/me');
+
+export default axiosInstance;
