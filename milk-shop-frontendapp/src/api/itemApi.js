@@ -10,35 +10,7 @@ const getAuthToken = () => {
   return localStorage.getItem('token');
 };
 
-// Create Item API
-// export const createItem = async (itemData) => {
-//   const token = getAuthToken();  // Get token from localStorage
-//   const formData = new FormData();
-  
-//   formData.append('name', itemData.name);
-//   formData.append('price', itemData.price);
-//   formData.append('unit', itemData.unit);
-  
-//   if (itemData.imageUrl) {
-//     formData.append('imageUrl', itemData.imageUrl);  // Add image if present
-//   }
 
-//   try {
-//     const response = await axios.post(
-//       `${API_URL}/items`,
-//       formData,
-//       {
-//         headers: {
-//           'Authorization': `Bearer ${token}`,  // Include the token for authentication
-//         },
-//       }
-//     );
-//     return response.data;  // Return the response data
-//   } catch (error) {
-//     console.error('Error creating item:', error.response ? error.response.data : error.message);
-//     throw error;  // Rethrow error for the calling function to handle
-//   }
-// };
 export const createItem = async (itemData) => {
   const token = localStorage.getItem('token');
   const formData = new FormData();
@@ -53,7 +25,7 @@ export const createItem = async (itemData) => {
     formData.append('imageUrl', itemData.imageFile); 
   }
 
-  const response = await axios.post('http://localhost:5000/api/items', formData, {
+  const response = await axios.post(`${API_URL}/items`, formData, {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'multipart/form-data', // Image ke liye ye bohat zaroori hai
