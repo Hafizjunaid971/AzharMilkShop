@@ -6,15 +6,13 @@ const DashboardLayout = () => {
   return (
     <div className="flex min-h-screen bg-slate-50">
       {/* Sidebar fixed width */}
-      <Sidebar />
-
-      {/* Main Page Content */}
-      <div className="flex-1 ml-64 p-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Yahan aapke saare pages (AddItem, AddSale) load honge */}
-          <Outlet />
-        </div>
+    <div className="hidden lg:block w-64 fixed inset-y-0">
+        <Sidebar />
       </div>
+      {/* Main Page Content */}
+          <main className="flex-1 lg:ml-64 p-4 md:p-8">
+          <Outlet />
+        </main>
     </div>
   );
 };

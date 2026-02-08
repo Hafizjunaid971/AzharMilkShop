@@ -53,16 +53,16 @@ const AddItem = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10">
-      <div className="bg-white p-8 rounded-[2rem] shadow-xl border border-slate-100">
-        <h2 className="text-2xl font-black text-slate-800 mb-6 uppercase tracking-tight">✨ Add New Product</h2>
+    <div className="w-full max-w-md mx-auto mt-6 md:mt-10 px-4 mb-10">
+      <div className="bg-white p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] shadow-xl border border-slate-100">
+        <h2 className="text-xl md:text-2xl font-black text-slate-800 mb-6 uppercase tracking-tight text-center md:text-left">✨ Add New Product</h2>
         
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5">
           {/* Product Name */}
           <div>
-            <label className="text-xs font-bold text-slate-400 uppercase ml-1 tracking-widest">Product Name</label>
+            <label className="text-[10px] md:text-xs font-bold text-slate-400 uppercase ml-1 tracking-widest">Product Name</label>
             <input 
-              className="w-full p-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-blue-500 focus:bg-white outline-none font-bold"
+              className="w-full p-3 md:p-4 bg-slate-50 border-2 border-transparent rounded-xl md:rounded-2xl focus:border-blue-500 focus:bg-white outline-none font-bold text-sm md:text-base"
               placeholder="e.g. Fresh Milk"
               value={name}
               onChange={e => setName(e.target.value)}
@@ -72,10 +72,10 @@ const AddItem = () => {
 
           {/* Price */}
           <div>
-            <label className="text-xs font-bold text-slate-400 uppercase ml-1 tracking-widest">Price (PKR)</label>
+            <label className="text-[10px] md:text-xs font-bold text-slate-400 uppercase ml-1 tracking-widest">Price (PKR)</label>
             <input 
               type="number"
-              className="w-full p-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-blue-500 focus:bg-white outline-none font-bold"
+              className="w-full p-3 md:p-4 bg-slate-50 border-2 border-transparent rounded-xl md:rounded-2xl focus:border-blue-500 focus:bg-white outline-none font-bold text-sm md:text-base"
               placeholder="e.g. 210"
               value={price}
               onChange={e => setPrice(e.target.value)}
@@ -85,9 +85,9 @@ const AddItem = () => {
 
           {/* Unit Select */}
           <div>
-            <label className="text-xs font-bold text-slate-400 uppercase ml-1 tracking-widest">Unit</label>
+            <label className="text-[10px] md:text-xs font-bold text-slate-400 uppercase ml-1 tracking-widest">Unit</label>
             <select 
-              className="w-full p-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-blue-500 focus:bg-white outline-none font-bold cursor-pointer"
+              className="w-full p-3 md:p-4 bg-slate-50 border-2 border-transparent rounded-xl md:rounded-2xl focus:border-blue-500 focus:bg-white outline-none font-bold cursor-pointer text-sm md:text-base"
               value={unit}
               onChange={e => setUnit(e.target.value)}
             >
@@ -99,14 +99,15 @@ const AddItem = () => {
 
           {/* Image Upload Field */}
           <div>
-            <label className="text-xs font-bold text-slate-400 uppercase ml-1 tracking-widest">Product Image</label>
-            <div className="mt-2 flex items-center justify-center w-full">
-              <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-slate-200 border-dashed rounded-2xl cursor-pointer bg-slate-50 hover:bg-slate-100 transition-all">
-                <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                  <p className="text-sm text-slate-500 font-medium">
-                    {imageFile ? `✅ ${imageFile.name}` : "Click to upload image"}
-                  </p>
-                </div>
+            <label className="text-[10px] md:text-xs font-bold text-slate-400 uppercase ml-1 tracking-widest">Product Image</label>
+           <div className="mt-2 flex items-center justify-center w-full">
+          {/* Height h-24 (mobile) h-32 (desktop) */}
+          <label className="flex flex-col items-center justify-center w-full h-24 md:h-32 border-2 border-slate-200 border-dashed rounded-xl md:rounded-2xl cursor-pointer bg-slate-50 hover:bg-slate-100 transition-all">
+            <div className="flex flex-col items-center justify-center pt-4 pb-4">
+              <p className="text-xs md:text-sm text-slate-500 font-medium px-2 text-center">
+                {imageFile ? `✅ ${imageFile.name}` : "Click to upload image"}
+              </p>
+            </div>
                 <input 
                   type="file" 
                   className="hidden" 
