@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const SaleList = () => {
   const [sales, setSales] = useState([]);
   const token = localStorage.getItem('token');
 
   const fetchSales = async () => {
-    const res = await axios.get('http://localhost:5000/api/sales', { headers: { Authorization: `Bearer ${token}` }});
+    const res = await axios.get(`${API_URL}/sales`, { headers: { Authorization: `Bearer ${token}` }});
     if (res.data.success) setSales(res.data.data);
   };
 
@@ -15,7 +16,7 @@ const SaleList = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Sale record delete karein?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/sales/${id}`, { headers: { Authorization: `Bearer ${token}` }});
+      await axios.delete(`${API_URL}/sales/${id}`, { headers: { Authorization: `Bearer ${token}` }});
       setSales(sales.filter(s => s._id !== id));
     } catch (err) { alert("Error deleting sale"); }
   };

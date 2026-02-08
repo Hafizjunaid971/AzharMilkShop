@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const StockList = () => {
   
@@ -7,7 +8,7 @@ const StockList = () => {
   const token = localStorage.getItem('token');
 
   const fetchStocks = async () => {
-    const res = await axios.get('http://localhost:5000/api/stock', { headers: { Authorization: `Bearer ${token}` }});
+    const res = await axios.get(`${API_URL}/stock`, { headers: { Authorization: `Bearer ${token}` }});
     if (res.data.success) setStocks(res.data.data);
   };
 
@@ -16,7 +17,7 @@ const StockList = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Stock record delete karein?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/stock/${id}`, { headers: { Authorization: `Bearer ${token}` }});
+      await axios.delete(`${API_URL}/stock/${id}`, { headers: { Authorization: `Bearer ${token}` }});
       setStocks(stocks.filter(s => s._id !== id));
     } catch (err) { alert("Delete failed"); }
   };

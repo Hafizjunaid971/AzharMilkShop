@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const AddSale = () => {
   const [items, setItems] = useState([]);
@@ -12,7 +13,7 @@ const AddSale = () => {
     const fetchItems = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5000/api/items', {
+        const res = await axios.get(`${API_URL}/items`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (res.data.success) setItems(res.data.data);
@@ -57,7 +58,7 @@ const AddSale = () => {
         date: date
       };
 
-      const res = await axios.post('http://localhost:5000/api/sales', payload, {
+      const res = await axios.post(`${API_URL}/sales`, payload, {
         headers: { Authorization: `Bearer ${token}` }
       });
 

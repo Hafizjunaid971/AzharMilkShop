@@ -1,95 +1,8 @@
-// import React, { useEffect, useState } from 'react';
-// import { useAuth } from '../../context/AuthContext';
-// import { getAllItems } from '../../api/itemApi';
-// import AddItem from './AddItem';
-
-// const ItemList = () => {
-//   const { token } = useAuth();
-//   const [items, setItems] = useState([]);
-
-//   const fetchItems = async () => {
-//     const res = await getAllItems(token);
-//     if (res.success) setItems(res.data);
-//   };
-
-//   useEffect(() => { fetchItems(); }, []);
-
-//   return (
-//     <div>
-//       <h2>Items</h2>
-//       <AddItem onSuccess={fetchItems} />
-//       <table border="1" cellPadding="10">
-//         <thead>
-//           <tr>
-//             <th>Name</th>
-//             <th>Price</th>
-//             <th>Unit</th>
-//             <th>Image</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {items.map(item => (
-//             <tr key={item._id}>
-//               <td>{item.name}</td>
-//               <td>{item.price}</td>
-//               <td>{item.unit}</td>
-//               <td>
-//                 <img src={`http://localhost:5000/${item.imageUrl}`} width="50" />
-//               </td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default ItemList;
-
-
-// import React, { useEffect, useState } from 'react';
-// import { getAllItems } from '../../api/itemApi';
-
-// const ItemList = () => {
-//   const [items, setItems] = useState([]);
-
-//   useEffect(() => {
-//     const fetch = async () => {
-//       const res = await getAllItems();
-//       if (res.success) setItems(res.data);
-//     };
-//     fetch();
-//   }, []);
-
-//   return (
-//     <div className="overflow-x-auto">
-//       <table className="w-full text-left border-collapse">
-//         <thead>
-//           <tr className="border-b border-gray-100">
-//             <th className="py-4 px-2 text-gray-400 font-medium uppercase text-sm">Product</th>
-//             <th className="py-4 px-2 text-gray-400 font-medium uppercase text-sm">Price</th>
-//             <th className="py-4 px-2 text-gray-400 font-medium uppercase text-sm">Unit</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {items.map(item => (
-//             <tr key={item._id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
-//               <td className="py-4 px-2 font-bold text-gray-700">{item.name}</td>
-//               <td className="py-4 px-2 text-blue-600 font-semibold">{item.price} PKR</td>
-//               <td className="py-4 px-2"><span className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs uppercase">{item.unit}</span></td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default ItemList;
 
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
@@ -99,7 +12,7 @@ const ItemList = () => {
   const fetchItems = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/items', {
+      const res = await axios.get(`${API_URL}/items`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data.success) {
@@ -121,7 +34,7 @@ const ItemList = () => {
     if (!window.confirm("Are you sure you want to delete this item?")) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/items/${id}`, {
+      await axios.delete(`${API_URL}/items/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setItems(items.filter(item => item._id !== id));
