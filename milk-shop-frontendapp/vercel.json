@@ -1,8 +1,11 @@
 {
   "version": 2,
   "public": true,
-  "cleanUrls": true,
+  "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
